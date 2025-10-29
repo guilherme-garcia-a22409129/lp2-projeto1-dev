@@ -8,6 +8,7 @@ import static java.lang.Integer.parseInt;
 public class GameManager {
     Tabuleiro tabuleiro;
     static HashMap <Integer, Jogador> jogadores = new HashMap<>();
+    int jogadorAtual;
 
 
     public GameManager() {
@@ -92,9 +93,66 @@ public class GameManager {
                     " | " + jogador.getNome() +
                     " | " + jogador.getPosicao() +
                     " | " + jogador.getLinguagensFavoritas() +
-                    " | "; //falta meter aqui se ganhou ou está em jogo
+                    " | " + "Em Jogo"; // Estado fixo como "Em Jogo" ate á pt2
         } else {
             return null;
         }
+    }
+
+    public String[] getSlotInfo(int position){
+        String infoArr[] = new String[1];
+        String info = null;
+
+        for (Jogador jogador : jogadores.values()) {
+            if (jogador.estaNaPosicao(position)) {
+
+                if (info == null) {
+                    info = Integer.toString(jogador.getId());
+                } else {
+                    info += "," + jogador.getId();
+                }
+            }
+        }
+
+        infoArr[0] = info;
+        return infoArr;
+    }
+
+    public int getCurrentPlayerID(){
+        return jogadorAtual;
+    }
+
+    public boolean moveCurrentPlayer(int nrSpaces){
+        if (nrSpaces <= 0 ) {
+            return false;
+        }
+        Jogador jogador = getJogadorAtual();
+        int posicaoInicial = jogador.getPosicao();
+        if (posicaoInicial + nrSpaces <= tabuleiro.getUltimaPosicao()) {
+            jogador.avancarCasas(nrSpaces);
+            return true;
+        } else {
+            int casasAmais = nrSpaces - tabuleiro.casasAteAMeta(posicaoInicial);
+
+            jogador.vaiParaPosicao(tabuleiro.ultimaPosicao - casasAmais);
+            return true;
+        }
+    }
+
+    public boolean gameIsOver(){
+        for (Jogador jogador : jogadores.values()) {
+            if (jogador.estaNaPosicao(tabuleiro.getUltimaPosicao())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Jogador getJogador(int id) {
+        return jogadores.get(id);
+    }
+
+    public Jogador getJogadorAtual() {
+        return jogadores.get(jogadorAtual);
     }
 }

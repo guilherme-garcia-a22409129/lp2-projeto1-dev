@@ -15,4 +15,8 @@ public class Tabuleiro {
     public int getUltimaPosicao() {
         return ultimaPosicao;
     }
+
+    public int casasAteAMeta(int posicaoAtual) {
+        return tamanho - posicaoAtual;
+    }
 }

@@ -34,6 +34,18 @@ public class Jogador {
         return String.join(";", linguagens);
     }
 
+    public boolean estaNaPosicao(int posicao) {
+        return getPosicao()==posicao;
+    }
+
+    public  void avancarCasas(int nrCasas) {
+        this.posicao += nrCasas;
+    }
+
+    public  void vaiParaPosicao(int novaPosicao) {
+        this.posicao = novaPosicao;
+    }
+
     public Cor getCor() {
         return cor;
     }
@@ -41,4 +53,6 @@ public class Jogador {
     public int getPosicao() {
         return posicao;
     }
+
+
 }
