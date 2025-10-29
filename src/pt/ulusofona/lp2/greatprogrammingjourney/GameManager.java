@@ -9,6 +9,8 @@ public class GameManager {
     Tabuleiro tabuleiro;
     static HashMap <Integer, Jogador> jogadores = new HashMap<>();
     int jogadorAtual;
+    int nrTurnos = 0;
+    Jogador vencedor;
 
 
     public GameManager() {
@@ -146,6 +148,23 @@ public class GameManager {
             }
         }
         return false;
+    }
+
+    public ArrayList<String> getGameResults(){
+        ArrayList<String> results = new ArrayList<>();
+        results.add("THE GREAT PROGRAMMING JOURNEY");
+        results.add("");
+        results.add("NR. DE TURNOS");
+        results.add(String.valueOf(nrTurnos));
+        results.add("");
+        results.add("VENCEDOR");
+        results.add(vencedor.nome);
+        results.add("");
+        results.add("RESTANTES");
+
+        //falta implementar os outros jogadores organizados por posiçao (mais perto da meta)
+
+        return results;
     }
 
     public Jogador getJogador(int id) {
