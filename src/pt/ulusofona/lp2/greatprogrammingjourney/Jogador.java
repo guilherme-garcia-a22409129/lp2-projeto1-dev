@@ -82,10 +82,10 @@ public class Jogador {
     public String toString() {
         String[] arr = this.linguagens.toArray(new String[0]);
         Arrays.sort(arr);
-        return this.id + " | " + this.nome + " | " + this.posicao + " | " + String.join(";", arr) + " | " + (this.derrotado ? "Derrotado" : "Em Jogo");
+        return this.id + " | " + this.nome + " | " + this.posicao + " | " + String.join("; ", arr) + " | " + (this.derrotado ? "Derrotado" : "Em Jogo");
     }
 
     public String[] toArray() {
-        return new String[] {String.valueOf(this.id), this.nome, String.join("; ", this.linguagens), this.cor, String.valueOf(this.posicao)};
+        return new String[] {String.valueOf(this.id), this.nome, String.join(";", this.linguagens), this.cor, String.valueOf(this.posicao)};
     }
 }
